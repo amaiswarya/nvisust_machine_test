@@ -126,7 +126,8 @@ class _DashboardState extends State<Dashboard> {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  viewModel.isLeaveToday
+                                  (viewModel.isLeaveToday &&
+                                          viewModel.isExistToday)
                                       ? "You are on leave today"
                                       : (viewModel.isExistToday &&
                                               !viewModel.isPunchedIn)
@@ -145,7 +146,8 @@ class _DashboardState extends State<Dashboard> {
 
                               GestureDetector(
                                 onTap: () {
-                                  if (!viewModel.isLeaveToday) {
+                                  if (!viewModel.isLeaveToday ||
+                                      !viewModel.isExistToday) {
                                     _togglePunchStatus(viewModel.isExistToday,
                                         viewModel.isPunchedIn);
                                   }
@@ -173,7 +175,8 @@ class _DashboardState extends State<Dashboard> {
                                             viewModel.isPageLoading)
                                         ? CircularProgressIndicator()
                                         : Text(
-                                            viewModel.isLeaveToday
+                                            (viewModel.isLeaveToday &&
+                                                    viewModel.isExistToday)
                                                 ? "Leave"
                                                 : (viewModel.isExistToday &&
                                                         !viewModel.isPunchedIn)

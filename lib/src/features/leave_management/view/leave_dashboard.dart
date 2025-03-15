@@ -43,8 +43,7 @@ class _LeaveDashboardState extends State<LeaveDashboard> {
                   future: dashboardViewModel.getLeaveList(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
-                          child: CircularProgressIndicator()); // Show loading
+                      return Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
                       return Center(child: Text("Error fetching data"));
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -59,13 +58,11 @@ class _LeaveDashboardState extends State<LeaveDashboard> {
                         itemBuilder: (context, index) {
                           LeaveModel leave = leaves[index].leaveData!;
                           return LeaveItem(
-                            leaveType: leave.leaveType ?? "",
-                            startDate: leave.startDate ?? "",
-                            endDate: leave.endDate ?? "",
-                            reason: leave.reason ?? "",
-                            status:
-                                'Approved', // "Approved", "Rejected", "Pending"
-                          );
+                              leaveType: leave.leaveType ?? "-",
+                              startDate: leave.startDate ?? "-",
+                              endDate: leave.endDate ?? "-",
+                              reason: leave.reason ?? "-",
+                              status: leave.status ?? "-");
                         });
                   }),
             ),

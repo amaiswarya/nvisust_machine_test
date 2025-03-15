@@ -116,7 +116,7 @@ class _ApplyLeaveState extends State<ApplyLeave> {
             Text("Reason",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             CustomTextformField(
-              hintText: 'REason',
+              hintText: 'Reason',
               type: InputTypes.long,
               controller: reasonController,
             ),
@@ -133,14 +133,13 @@ class _ApplyLeaveState extends State<ApplyLeave> {
                     showErrorToast("Reason is manadatory");
                   } else {
                     await dashboardViewModel
-                        .markLeave(
-                            DateTime.now().toFormattedString(),
-                            LeaveModel(
-                              startDate: startDate.toFormattedString(),
-                              endDate: endDate.toFormattedString(),
-                              reason: reasonController.text.trim(),
-                              leaveType: leaveTYpe,
-                            ))
+                        .markLeave(LeaveModel(
+                          startDate: startDate.toFormattedString(),
+                          endDate: endDate.toFormattedString(),
+                          reason: reasonController.text.trim(),
+                          status: "Pending",
+                          leaveType: leaveTYpe,
+                        ))
                         .whenComplete(() => context.maybePop());
                   }
                 },

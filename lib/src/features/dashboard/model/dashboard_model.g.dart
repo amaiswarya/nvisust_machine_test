@@ -44,6 +44,7 @@ Map<String, dynamic> _$AttendanceModelToJson(AttendanceModel instance) =>
 LeaveModel _$LeaveModelFromJson(Map<String, dynamic> json) => LeaveModel(
       startDate: json['startDate'] as String?,
       endDate: json['endDate'] as String?,
+      status: json['status'] as String?,
       reason: json['reason'] as String?,
       leaveType: json['leaveType'] as String?,
       isApproved: json['isApproved'] as bool?,
@@ -54,6 +55,7 @@ Map<String, dynamic> _$LeaveModelToJson(LeaveModel instance) =>
       'startDate': instance.startDate,
       'endDate': instance.endDate,
       'reason': instance.reason,
+      'status': instance.status,
       'leaveType': instance.leaveType,
       'isApproved': instance.isApproved,
     };

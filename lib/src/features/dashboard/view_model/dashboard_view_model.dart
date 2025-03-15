@@ -41,16 +41,16 @@ class DashboardViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> markLeave(String date, LeaveModel data) async {
+  Future<void> markLeave(LeaveModel data) async {
     try {
       final response =
-          await servicelocator<DashboardRepo>().markLeave(date, true, data);
+          await servicelocator<DashboardRepo>().markLeave(true, data);
       response.fold((fail) {
         _isLoading = false;
         showErrorToast(fail.message);
       }, (right) {
         _isLoading = false;
-        showSuccessToast("Attendance Marked");
+        showSuccessToast("Leave applied successfully");
       });
     } catch (e) {
       showErrorToast(e.toString());

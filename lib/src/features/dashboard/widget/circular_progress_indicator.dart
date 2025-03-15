@@ -133,14 +133,12 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
             child: Text("Attendance")),
         ElevatedButton(
             onPressed: () {
-              dashboardViewModel.markLeave(
-                  '14-02-2020',
-                  LeaveModel(
-                      leaveType: "sick",
-                      startDate: "6-09-2024",
-                      endDate: "7-10-2024",
-                      reason: "Sick leave",
-                      isApproved: true));
+              dashboardViewModel.markLeave(LeaveModel(
+                  leaveType: "sick",
+                  startDate: "6-09-2024",
+                  endDate: "7-10-2024",
+                  reason: "Sick leave",
+                  isApproved: true));
             },
             child: Text("Leave")),
         ElevatedButton(

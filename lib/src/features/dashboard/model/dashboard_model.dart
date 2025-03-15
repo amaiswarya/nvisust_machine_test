@@ -45,11 +45,13 @@ class LeaveModel {
   String? startDate;
   String? endDate;
   String? reason;
+  String? status;
   String? leaveType;
   bool? isApproved;
   LeaveModel(
       {this.startDate,
       this.endDate,
+      this.status,
       this.reason,
       this.leaveType,
       this.isApproved});

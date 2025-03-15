@@ -7,8 +7,7 @@ import 'package:nvisust_test/src/services/firebase_services.dart';
 abstract class DashboardRepo {
   Future<Either<Failure, bool>> markAttendance(
       String date, bool isLeave, AttendanceModel data);
-  Future<Either<Failure, bool>> markLeave(
-      String date, bool isLeave, LeaveModel data);
+  Future<Either<Failure, bool>> markLeave(bool isLeave, LeaveModel data);
 
   Future<Either<Failure, LeaveResponse>> getLeaveList();
 
@@ -38,15 +37,14 @@ class DashboardRepoImplements extends DashboardRepo {
   }
 
   @override
-  Future<Either<Failure, bool>> markLeave(
-      String date, bool isLeave, LeaveModel data) async {
+  Future<Either<Failure, bool>> markLeave(bool isLeave, LeaveModel data) async {
     try {
       final result = await _firebaseServices.setSubDocument(
-          "users",
-          "attendance",
-          SharedUtils.getUUID,
-          date,
-          {"date": date, "is_leave": isLeave, "leave_data": data.toJson()});
+          "users", "attendance", SharedUtils.getUUID, data.startDate ?? "", {
+        "date": data.startDate ?? "",
+        "is_leave": isLeave,
+        "leave_data": data.toJson()
+      });
       return result.fold((failure) => Left(failure), (docs) => Right(true));
     } catch (e) {
       return Left(Failure(message: e.toString()));

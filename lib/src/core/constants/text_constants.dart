@@ -6,4 +6,5 @@ class TextConstants {
   static const String welcomeDashboard = "Welcome to Dashboard";
   static const String selectLeave = "Select Leave";
   static const String reason = "Reason";
+  static const String alredayMarked = "Already marked attendance";
 }
