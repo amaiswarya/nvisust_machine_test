@@ -10,9 +10,10 @@ abstract class DashboardRepo {
   Future<Either<Failure, bool>> markLeave(
       String date, bool isLeave, LeaveModel data);
 
-  Future<Either<Failure, int>> getLeaveList();
+  Future<Either<Failure, LeaveResponse>> getLeaveList();
 
   Future<Either<Failure, bool>> isExist(String date);
+  Future<Either<Failure, DashboardModel>> getDocument(String date);
   Future<Either<Failure, bool>> updatePunchout(
       String date, Map<String, dynamic> data);
 }
@@ -53,7 +54,7 @@ class DashboardRepoImplements extends DashboardRepo {
   }
 
   @override
-  Future<Either<Failure, int>> getLeaveList() async {
+  Future<Either<Failure, LeaveResponse>> getLeaveList() async {
     try {
       final result = await _firebaseServices.getSubCollectionAsList(
         "users",
@@ -61,8 +62,11 @@ class DashboardRepoImplements extends DashboardRepo {
         SharedUtils.getUUID,
       );
 
-      return result.fold(
-          (failure) => Left(failure), (docs) => Right(docs['data'].length));
+      return result.fold((failure) => Left(failure), (docs) {
+        LeaveResponse data = LeaveResponse.fromJson(docs);
+        print(data);
+        return Right(data);
+      });
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }
@@ -75,6 +79,19 @@ class DashboardRepoImplements extends DashboardRepo {
           "users", SharedUtils.getUUID, "attendance", date);
 
       return result.fold((failure) => Left(failure), (exist) => Right(exist));
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, DashboardModel>> getDocument(String date) async {
+    try {
+      final result = await _firebaseServices.getDocument(
+          "users", SharedUtils.getUUID, "attendance", date);
+
+      return result.fold((failure) => Left(failure),
+          (data) => Right(DashboardModel.fromJson(data)));
     } catch (e) {
       return Left(Failure(message: e.toString()));
     }

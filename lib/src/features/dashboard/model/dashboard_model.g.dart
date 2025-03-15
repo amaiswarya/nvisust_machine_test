@@ -9,7 +9,7 @@ part of 'dashboard_model.dart';
 DashboardModel _$DashboardModelFromJson(Map<String, dynamic> json) =>
     DashboardModel(
       date: json['date'] as String?,
-      isLeave: json['isLeave'] as bool,
+      isLeave: json['is_leave'] as bool,
       loginData: json['login_data'] == null
           ? null
           : AttendanceModel.fromJson(
@@ -22,7 +22,7 @@ DashboardModel _$DashboardModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$DashboardModelToJson(DashboardModel instance) =>
     <String, dynamic>{
       'date': instance.date,
-      'isLeave': instance.isLeave,
+      'is_leave': instance.isLeave,
       'login_data': instance.loginData,
       'leave_data': instance.leaveData,
     };
@@ -30,13 +30,13 @@ Map<String, dynamic> _$DashboardModelToJson(DashboardModel instance) =>
 AttendanceModel _$AttendanceModelFromJson(Map<String, dynamic> json) =>
     AttendanceModel(
       loginTime: json['loginTime'] as String?,
-      duration: json['duration'] as String?,
+      isPunchedIn: json['isPunchedIn'] as bool,
       logoutTime: json['logoutTime'] as String?,
     );
 
 Map<String, dynamic> _$AttendanceModelToJson(AttendanceModel instance) =>
     <String, dynamic>{
-      'duration': instance.duration,
+      'isPunchedIn': instance.isPunchedIn,
       'loginTime': instance.loginTime,
       'logoutTime': instance.logoutTime,
     };
@@ -56,4 +56,16 @@ Map<String, dynamic> _$LeaveModelToJson(LeaveModel instance) =>
       'reason': instance.reason,
       'leaveType': instance.leaveType,
       'isApproved': instance.isApproved,
+    };
+
+LeaveResponse _$LeaveResponseFromJson(Map<String, dynamic> json) =>
+    LeaveResponse(
+      data: (json['data'] as List<dynamic>?)
+          ?.map((e) => DashboardModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$LeaveResponseToJson(LeaveResponse instance) =>
+    <String, dynamic>{
+      'data': instance.data,
     };

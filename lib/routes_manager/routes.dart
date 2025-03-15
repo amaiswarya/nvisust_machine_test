@@ -6,9 +6,10 @@ class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
         CupertinoRoute<dynamic>(page: LoginRoute.page, initial: true),
+        CupertinoRoute<dynamic>(page: LeaveDashboardRoute.page, initial: false),
+        CupertinoRoute<dynamic>(page: ApplyLeaveRoute.page, initial: false),
         CupertinoRoute<dynamic>(
           page: DashboardRoute.page,
-          // initial: true,
         ),
       ];
 }

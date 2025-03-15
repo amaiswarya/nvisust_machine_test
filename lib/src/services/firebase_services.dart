@@ -5,10 +5,15 @@ import 'package:nvisust_test/src/services/base_response/base_reponse.dart';
 class FirebaseServices {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<Either<Failure, Map<String, dynamic>>> getDocument(
-      String collection, String docId) async {
+  Future<Either<Failure, Map<String, dynamic>>> getDocument(String collection,
+      String docId, String subCollection, String subDocId) async {
     try {
-      final doc = await _firestore.collection(collection).doc(docId).get();
+      final doc = await _firestore
+          .collection(collection)
+          .doc(docId)
+          .collection(subCollection)
+          .doc(subDocId)
+          .get();
       if (doc.exists && doc.data() != null) {
         return Right(doc.data()!);
       } else {

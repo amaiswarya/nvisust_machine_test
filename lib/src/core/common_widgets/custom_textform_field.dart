@@ -9,7 +9,7 @@ class CustomTextformField extends StatelessWidget {
 
   final TextEditingController controller;
   final TextInputType? keyboardType;
-  final Enum type;
+  final InputTypes type;
 
   const CustomTextformField({
     super.key,
@@ -43,9 +43,9 @@ class CustomTextformField extends StatelessWidget {
 
                 return null;
               },
+              maxLines: type == InputTypes.long ? 4 : 1,
               obscureText: (type == InputTypes.password && !isObscured.value),
               decoration: InputDecoration(
-                errorMaxLines: 4,
                 isDense: true,
                 hintText: hintText,
                 hintStyle: TextStyles.blackprimary_12_400,
@@ -93,9 +93,9 @@ class CustomTextformField extends StatelessWidget {
 }
 
 enum InputTypes {
-  name,
+  text,
 
   email,
-  phone,
+  long,
   password
 }

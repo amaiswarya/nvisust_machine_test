@@ -126,7 +126,9 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator> {
               dashboardViewModel.attendanceMark(
                   '12-02-2020',
                   AttendanceModel(
-                      duration: "5", loginTime: "12:00", logoutTime: "5:00"));
+                      isPunchedIn: true,
+                      loginTime: "12:00",
+                      logoutTime: "5:00"));
             },
             child: Text("Attendance")),
         ElevatedButton(

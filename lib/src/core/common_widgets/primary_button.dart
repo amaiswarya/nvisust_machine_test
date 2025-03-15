@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nvisust_test/src/core/utils/styles/app_colors.dart';
 import 'package:nvisust_test/src/core/utils/styles/text_styles.dart';
 
-enum ButtonTypes { primary, secondary, icon, inActive }
-
 class ButtonWidget extends StatefulWidget {
   final VoidCallback? onTap;
   final String text;

@@ -17,6 +17,8 @@ class AuthViewModel extends ChangeNotifier {
   FutureOr<void> googleLogin(
       String email, String password, BuildContext context) async {
     try {
+      _isLoading = true;
+      notifyListeners();
       final response = await servicelocator<AuthRepo>().signIn(email, password);
 
       response.fold((fail) {
@@ -40,8 +42,11 @@ class AuthViewModel extends ChangeNotifier {
           context.replaceRoute(DashboardRoute());
         });
       });
+      notifyListeners();
     } catch (e) {
+      _isLoading = false;
       showErrorToast(e.toString());
     }
+    notifyListeners();
   }
 }

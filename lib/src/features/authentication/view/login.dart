@@ -64,6 +64,7 @@ class _LoginState extends State<Login> {
               Consumer<AuthViewModel>(
                 builder: (BuildContext context, value, Widget? child) {
                   return ButtonWidget.primary(
+                    isLoading: value.isLoading,
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
                         context.read<AuthViewModel>().googleLogin(
