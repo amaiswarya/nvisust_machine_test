@@ -4,5 +4,7 @@ final servicelocator = GetIt.instance;
 Future<void> getInit() async {
   servicelocator
     ..registerFactory(() => AuthViewModel())
-    ..registerLazySingleton<AuthRepo>(() => AuthRepoImplements());
+    ..registerLazySingleton<AuthRepo>(() => AuthRepoImplements())
+    ..registerFactory(() => DashboardViewModel())
+    ..registerLazySingleton<DashboardRepo>(() => DashboardRepoImplements());
 }

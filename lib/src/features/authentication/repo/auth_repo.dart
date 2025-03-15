@@ -1,14 +1,17 @@
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nvisust_test/src/features/authentication/model/user_model.dart';
 import 'package:nvisust_test/src/services/base_response/base_reponse.dart';
+import 'package:nvisust_test/src/services/firebase_services.dart';
 
 abstract class AuthRepo {
   Future<Either<Failure, User>> signIn(String email, String password);
-
+  Future<Either<Failure, bool>> addUser(UserModel data);
   Future<Either<Failure, bool>> signOut();
 }
 
 final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+final FirebaseServices _firebaseServices = FirebaseServices();
 
 class AuthRepoImplements extends AuthRepo {
   @override
@@ -37,6 +40,17 @@ class AuthRepoImplements extends AuthRepo {
       return Left(Failure(message: _mapFirebaseError(e)));
     } catch (e) {
       return Left(Failure(message: "Logout Failed"));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> addUser(UserModel data) async {
+    try {
+      final result = await _firebaseServices.setDocument(
+          "users", data.uuid ?? '', data.toJson());
+      return result.fold((failure) => Left(failure), (docs) => Right(true));
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
     }
   }
 

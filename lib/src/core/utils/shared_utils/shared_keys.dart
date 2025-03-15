@@ -1,1 +1,3 @@
-class SharedKeys {}
+class SharedKeys {
+  static String uuid = 'uuid';
+}
